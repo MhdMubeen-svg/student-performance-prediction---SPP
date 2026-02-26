@@ -112,10 +112,11 @@ async function doSignup() {
   let hasErr = false;
   if (!fn) { get('err-signupFirst')?.classList.add('show'); hasErr = true; }
   if (!un || un.length < 3) { get('err-signupUser')?.classList.add('show'); hasErr = true; }
-  if (!em || !em.toLowerCase().endsWith('@gmail.com') || em.length <= 10) {
+  const emailRegex = /^[a-zA-Z0-9]+@gmail\.com$/i;
+  if (!em || !emailRegex.test(em)) {
     const errEl = get('err-signupEmail');
     if (errEl) {
-      errEl.textContent = 'Please enter a valid Gmail address (example: user@gmail.com)';
+      errEl.textContent = 'Please use only letters and numbers (example: user123@gmail.com)';
       errEl.classList.add('show');
     }
     hasErr = true;
