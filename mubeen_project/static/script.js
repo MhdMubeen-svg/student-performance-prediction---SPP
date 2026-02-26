@@ -448,11 +448,11 @@ function updateAcadYear() {
   const years = isEngg ? 4 : 3;
   const currentYear = new Date().getFullYear();
 
-  sel.innerHTML = '<option value="">Select academic year</option>';
+  sel.innerHTML = '<option value="">Select batch year</option>';
   for (let i = 0; i < years; i++) {
     const start = currentYear - i;
     const end = start + years;
-    const label = `${start} – ${end}`;
+    const label = `${start} – ${end} (Batch ${start})`;
     sel.innerHTML += `<option>${label}</option>`;
   }
 }
@@ -687,25 +687,44 @@ function showResult(s) {
   if (get('modalScore')) get('modalScore').textContent = score;
 
   const titleMap = {
-    advanced: '🟢 ADVANCED',
-    adv_intermediate: '🟣 ADV. INTERMEDIATE',
-    intermediate: '🔵 INTERMEDIATE',
-    basic: '🟡 BASIC',
-    ineligible: '🔴 NOT ELIGIBLE'
+    advanced: 'Advanced – Outstanding!',
+    adv_intermediate: 'Advanced Intermediate – Great Work!',
+    intermediate: 'Intermediate – Good Effort',
+    basic: 'Basic – Needs Improvement',
+    ineligible: 'Not Eligible'
   };
   if (get('modalTitle')) get('modalTitle').textContent = titleMap[level] || level.toUpperCase();
 
-  const colorMap = {
-    advanced: 'linear-gradient(135deg,#059669,#10b981)',
-    adv_intermediate: 'linear-gradient(135deg,#7c3aed,#8b5cf6)',
-    intermediate: 'linear-gradient(135deg,#2563eb,#3b82f6)',
-    basic: 'linear-gradient(135deg,#d97706,#f59e0b)',
-    ineligible: 'linear-gradient(135deg,#dc2626,#ef4444)'
+  const subMap = {
+    advanced: 'Exceptional performance! Keep up the excellent work to maintain this top tier.',
+    adv_intermediate: 'Impressive performance! A few more projects or internships will take you to Advanced.',
+    intermediate: 'Good performance! Increase your study hours and participation to reach the next level.',
+    basic: 'Passing performance. Focus on improving your internal marks and attendance.',
+    ineligible: 'Student has active arrears or score below 30. Clearance & improvement required.'
   };
-  const band = get('modalBand');
-  if (band) band.style.background = colorMap[level] || colorMap.basic;
+  if (get('modalSub')) get('modalSub').textContent = subMap[level] || '';
 
-  if (get('modalSub')) get('modalSub').textContent = (s.name || '') + ' — ' + (s.register_no || '');
+  const colorMap = {
+    advanced: '#d1fae5',
+    adv_intermediate: '#e0e7ff',
+    intermediate: '#dbeafe',
+    basic: '#fef3c7',
+    ineligible: '#ffe4e6'
+  };
+  const iconMap = {
+    advanced: '🌟',
+    adv_intermediate: '🌟',
+    intermediate: '👍',
+    basic: '⚠️',
+    ineligible: '❌'
+  };
+  if (get('modalIcon')) get('modalIcon').textContent = iconMap[level] || '🎓';
+
+  const band = get('modalBand');
+  if (band) {
+    band.style.background = colorMap[level] || colorMap.basic;
+    band.style.color = '#111827';
+  }
 
   // Result grid
   const grid = get('modalGrid');
@@ -714,10 +733,10 @@ function showResult(s) {
       { l: 'Attendance', v: s.attendance + '%' },
       { l: 'Study Hours', v: s.hour_study + ' hrs' },
       { l: 'Internal', v: s.internal + '/100' },
-      { l: 'Arrears', v: s.arrears },
       { l: 'Projects', v: s.projects },
       { l: 'Internships', v: s.internships },
-    ].map(f => `<div style="text-align:center;padding:10px;background:rgba(255,255,255,.1);border-radius:8px"><div style="font-size:.72rem;opacity:.7">${f.l}</div><div style="font-size:1.1rem;font-weight:700;margin-top:2px">${f.v}</div></div>`).join('');
+      { l: 'Arrears', v: s.arrears },
+    ].map(f => `<div style="text-align:center;padding:12px;background:#f9fafb;border-radius:8px;border:1px solid #f3f4f6"><div style="font-size:1.15rem;font-weight:800;color:#111827">${f.v}</div><div style="font-size:.7rem;color:#6b7280;margin-top:2px">${f.l}</div></div>`).join('');
   }
 
   overlay.classList.add('show');
