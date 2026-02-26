@@ -447,11 +447,9 @@ function updateAcadYear() {
 
   const isEngg = dept.includes('B.E') || dept.includes('B.Tech');
   const years = isEngg ? 4 : 3;
-  const currentYear = new Date().getFullYear();
 
   sel.innerHTML = '<option value="">Select batch year</option>';
-  for (let i = 0; i < years; i++) {
-    const start = currentYear - i;
+  for (let start = 2026; start >= 2000; start--) {
     const end = start + years;
     const label = `${start} – ${end} (Batch ${start})`;
     sel.innerHTML += `<option>${label}</option>`;
