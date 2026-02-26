@@ -112,7 +112,14 @@ async function doSignup() {
   let hasErr = false;
   if (!fn) { get('err-signupFirst')?.classList.add('show'); hasErr = true; }
   if (!un || un.length < 3) { get('err-signupUser')?.classList.add('show'); hasErr = true; }
-  if (!em || !em.includes('@')) { get('err-signupEmail')?.classList.add('show'); hasErr = true; }
+  if (!em || !em.toLowerCase().endsWith('@gmail.com') || em.length <= 10) {
+    const errEl = get('err-signupEmail');
+    if (errEl) {
+      errEl.textContent = 'Please enter a valid Gmail address (example: user@gmail.com)';
+      errEl.classList.add('show');
+    }
+    hasErr = true;
+  }
   if (!pw || pw.length < 6) { get('err-signupPw')?.classList.add('show'); hasErr = true; }
   if (pw !== pwc) { get('err-signupPwConfirm')?.classList.add('show'); hasErr = true; }
   if (hasErr) return;
