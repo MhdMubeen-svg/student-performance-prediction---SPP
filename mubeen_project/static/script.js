@@ -415,11 +415,12 @@ function updateSlider(inputId, labelId, val, suffix) {
 // ═══════════════════════════════════════════
 // COUNTER ADJUST (+/-)
 // ═══════════════════════════════════════════
-function adjustCounter(id, delta) {
+function adjustCounter(id, delta, maxVal = 999) {
   const inp = get(id);
   if (!inp) return;
   let v = parseInt(inp.value) || 0;
   v = Math.max(0, v + delta);
+  if (id === 'certs') v = Math.min(v, 100);
   inp.value = v;
   liveUpdate();
 }
@@ -512,6 +513,16 @@ function getLevel(score, arrears) {
 // LIVE UPDATE (score preview sidebar)
 // ═══════════════════════════════════════════
 function liveUpdate() {
+  // Enforce Max Limits
+  const intInp = get('internal');
+  if (intInp && parseInt(intInp.value) > 100) intInp.value = 100;
+
+  const arrInp = get('arrears');
+  if (arrInp && parseInt(arrInp.value) > 50) arrInp.value = 50;
+
+  const certInp = get('certs');
+  if (certInp && parseInt(certInp.value) > 100) certInp.value = 100;
+
   const { score, arrears } = calcScore();
   const level = getLevel(score, arrears);
 

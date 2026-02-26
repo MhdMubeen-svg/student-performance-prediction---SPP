@@ -452,11 +452,6 @@
                 <input type="number" id="arrears" placeholder="e.g. 0" min="0" value="0" oninput="liveUpdate()">
               </div>
             </div>
-
-            <div class="field" style="margin-bottom:16px;">
-              <label>🏫 Class Rank / Position <span class="tip">optional</span></label>
-              <input type="number" id="class_rank" placeholder="e.g. 5 (out of class)" min="1" oninput="liveUpdate()">
-            </div>
           </div>
 
           <!-- STEP 3: ACTIVITIES -->
@@ -519,7 +514,7 @@
             <div style="margin-bottom:18px">
               <label style="font-size:.78rem;font-weight:600;display:block;margin-bottom:10px">📜 Certifications &
                 Online Courses</label>
-              <div class="counter-field" style="max-width:200px">
+              <div class="counter-field">
                 <button class="counter-btn" onclick="adjustCounter('certs',-1)">−</button>
                 <input type="number" class="counter-input" id="certs" value="0" min="0" oninput="liveUpdate()">
                 <button class="counter-btn" onclick="adjustCounter('certs',1)">+</button>
