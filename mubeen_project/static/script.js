@@ -449,7 +449,7 @@ function updateAcadYear() {
   const years = isEngg ? 4 : 3;
 
   sel.innerHTML = '<option value="">Select batch year</option>';
-  for (let start = 2026; start >= 2000; start--) {
+  for (let start = 2000; start <= 2026; start++) {
     const end = start + years;
     const label = `${start} – ${end} (Batch ${start})`;
     sel.innerHTML += `<option>${label}</option>`;
