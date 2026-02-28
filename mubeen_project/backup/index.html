@@ -7,7 +7,7 @@
   <meta name="description"
     content="Klyra — A student performance evaluation and management system. Score, classify, and monitor student academic performance in real time.">
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%236366f1'/><stop offset='100%25' stop-color='%23a855f7'/></linearGradient></defs><polygon points='50,10 85,35 75,80 25,80 15,35' fill='url(%23g)' rx='4'/><polygon points='50,22 72,40 65,70 35,70 28,40' fill='%23fff' opacity='.25'/></svg>">
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='fg' x1='0' y1='1' x2='1' y2='0'><stop offset='0%25' stop-color='%237c3aed'/><stop offset='50%25' stop-color='%23f59e0b'/><stop offset='100%25' stop-color='%23ef4444'/></linearGradient></defs><path d='M15,70 Q50,45 50,45 Q50,45 85,70 L75,72 Q50,55 50,55 Q50,55 25,72 Z' fill='%236366f1'/><path d='M25,68 Q50,50 50,50 L50,30 Q35,20 25,30 Z' fill='%23f59e0b'/><path d='M75,68 Q50,50 50,50 L50,30 Q65,20 75,30 Z' fill='%23ef4444'/><rect x='42' y='8' width='16' height='4' rx='1' fill='%231e1b4b'/><polygon points='42,12 50,20 58,12' fill='%231e1b4b'/><line x1='50' y1='20' x2='50' y2='26' stroke='%23f59e0b' stroke-width='2'/><circle cx='50' cy='27' r='2' fill='%23f59e0b'/></svg>">
   <title>Klyra — Student Performance System</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500;600&display=swap"
@@ -27,16 +27,35 @@
     <div class="auth-left">
       <div class="auth-brand">
         <div class="auth-brand-icon">
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 48 48">
             <defs>
-              <linearGradient id="klyraGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#818cf8" />
-                <stop offset="100%" stop-color="#c084fc" />
+              <linearGradient id="bookLeft" x1="0" y1="0" x2="0.5" y2="1">
+                <stop offset="0%" stop-color="#f59e0b" />
+                <stop offset="100%" stop-color="#f97316" />
+              </linearGradient>
+              <linearGradient id="bookRight" x1="0.5" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ef4444" />
+                <stop offset="100%" stop-color="#ec4899" />
+              </linearGradient>
+              <linearGradient id="bookSpine" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="#6366f1" />
+                <stop offset="100%" stop-color="#8b5cf6" />
               </linearGradient>
             </defs>
-            <polygon points="12,2 21,8 18,20 6,20 3,8" fill="url(#klyraGrad)" stroke="none" />
-            <polygon points="12,5 18,9.5 16,17.5 8,17.5 6,9.5" fill="#fff" opacity=".2" stroke="none" />
-            <path d="M12,8 L15,12 L12,20 L9,12 Z" fill="#fff" opacity=".35" stroke="none" />
+            <!-- Open book pages -->
+            <path d="M6,36 Q24,24 24,24 L24,12 Q16,6 6,14 Z" fill="url(#bookLeft)" />
+            <path d="M42,36 Q24,24 24,24 L24,12 Q32,6 42,14 Z" fill="url(#bookRight)" />
+            <!-- Book spine -->
+            <path d="M6,36 Q24,28 24,28 Q24,28 42,36 L38,38 Q24,30 24,30 Q24,30 10,38 Z" fill="url(#bookSpine)" />
+            <!-- Center page crease -->
+            <path d="M22,12 Q24,14 24,24" stroke="#fff" stroke-width="0.5" fill="none" opacity=".4" />
+            <path d="M26,12 Q24,14 24,24" stroke="#fff" stroke-width="0.5" fill="none" opacity=".4" />
+            <!-- Graduation cap -->
+            <rect x="16" y="3" width="16" height="3.5" rx="1" fill="#1e1b4b" />
+            <polygon points="16,6.5 24,12 32,6.5" fill="#1e1b4b" />
+            <!-- Tassel -->
+            <line x1="30" y1="5" x2="34" y2="10" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" />
+            <circle cx="34.5" cy="11" r="1.5" fill="#f59e0b" />
           </svg>
         </div>
         <div class="auth-brand-name">Klyra</div>
@@ -240,16 +259,30 @@
   <nav class="topbar">
     <div class="brand">
       <div class="brand-icon">
-        <svg viewBox="0 0 24 24">
+        <svg viewBox="0 0 48 48">
           <defs>
-            <linearGradient id="klyraNavGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#818cf8" />
-              <stop offset="100%" stop-color="#c084fc" />
+            <linearGradient id="nbLeft" x1="0" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#f97316" />
+            </linearGradient>
+            <linearGradient id="nbRight" x1="0.5" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ef4444" />
+              <stop offset="100%" stop-color="#ec4899" />
+            </linearGradient>
+            <linearGradient id="nbSpine" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#6366f1" />
+              <stop offset="100%" stop-color="#8b5cf6" />
             </linearGradient>
           </defs>
-          <polygon points="12,2 21,8 18,20 6,20 3,8" fill="url(#klyraNavGrad)" stroke="none" />
-          <polygon points="12,5 18,9.5 16,17.5 8,17.5 6,9.5" fill="#fff" opacity=".2" stroke="none" />
-          <path d="M12,8 L15,12 L12,20 L9,12 Z" fill="#fff" opacity=".35" stroke="none" />
+          <path d="M6,36 Q24,24 24,24 L24,12 Q16,6 6,14 Z" fill="url(#nbLeft)" />
+          <path d="M42,36 Q24,24 24,24 L24,12 Q32,6 42,14 Z" fill="url(#nbRight)" />
+          <path d="M6,36 Q24,28 24,28 Q24,28 42,36 L38,38 Q24,30 24,30 Q24,30 10,38 Z" fill="url(#nbSpine)" />
+          <path d="M22,12 Q24,14 24,24" stroke="#fff" stroke-width="0.5" fill="none" opacity=".4" />
+          <path d="M26,12 Q24,14 24,24" stroke="#fff" stroke-width="0.5" fill="none" opacity=".4" />
+          <rect x="16" y="3" width="16" height="3.5" rx="1" fill="#1e1b4b" />
+          <polygon points="16,6.5 24,12 32,6.5" fill="#1e1b4b" />
+          <line x1="30" y1="5" x2="34" y2="10" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" />
+          <circle cx="34.5" cy="11" r="1.5" fill="#f59e0b" />
         </svg>
       </div>
       Klyra
@@ -536,11 +569,42 @@
               <div class="slider-labels"><span>0</span><span>8</span><span>16</span></div>
             </div>
 
-            <div class="grid-2">
-              <div class="field">
-                <label>📝 Internal Marks <span class="tip">out of 100</span></label>
-                <input type="number" id="internal" placeholder="e.g. 78" min="0" max="100" oninput="liveUpdate()">
+            <div class="internal-breakdown"
+              style="background:rgba(37,99,235,.04);border:1px solid rgba(37,99,235,.10);border-radius:12px;padding:16px 18px;margin-bottom:12px">
+              <label style="font-weight:600;font-size:.85rem;color:var(--ink);margin-bottom:10px;display:block">📝
+                Internal Marks Breakdown</label>
+              <div class="grid-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+                <div class="field">
+                  <label style="font-size:.75rem">Internal Test <span class="tip">/ 50</span></label>
+                  <input type="number" id="internal_test" placeholder="0" min="0" max="50"
+                    oninput="calcInternalTotal()">
+                </div>
+                <div class="field">
+                  <label style="font-size:.75rem">Assignment <span class="tip">/ 25</span></label>
+                  <input type="number" id="assignment" placeholder="0" min="0" max="25" oninput="calcInternalTotal()">
+                </div>
+                <div class="field">
+                  <label style="font-size:.75rem">Model Exam <span class="tip">/ 75</span></label>
+                  <input type="number" id="model_exam" placeholder="0" min="0" max="75" oninput="calcInternalTotal()">
+                </div>
               </div>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+                <div
+                  style="display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:rgba(37,99,235,.04);border-radius:6px">
+                  <span style="font-size:.75rem;color:var(--muted)">Raw Total</span>
+                  <span id="internalRawDisplay" style="font-size:.85rem;font-weight:600;color:var(--ink)">0 / 150</span>
+                </div>
+                <div
+                  style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(37,99,235,.08);border-radius:8px">
+                  <span style="font-size:.8rem;font-weight:600;color:var(--ink)">Normalized Score</span>
+                  <span id="internalTotalDisplay" style="font-size:1.1rem;font-weight:700;color:var(--accent)">0 /
+                    100</span>
+                </div>
+              </div>
+              <input type="hidden" id="internal" value="0">
+            </div>
+
+            <div class="grid-2">
               <div class="field">
                 <label>❗ Number of Arrears</label>
                 <input type="number" id="arrears" placeholder="e.g. 0" min="0" value="0" oninput="liveUpdate()">
