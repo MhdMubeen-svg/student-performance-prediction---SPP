@@ -343,10 +343,14 @@ function goStep(dir) {
     if (currentStep === 2) {
       const att = parseInt(get('attendance')?.value || '0');
       const hrs = parseInt(get('hour_study')?.value || '0');
-      const internal = get('internal')?.value?.trim();
+      const it = get('internal_test')?.value?.trim();
+      const asn = get('assignment')?.value?.trim();
+      const me = get('model_exam')?.value?.trim();
       if (att <= 0) { showToast('⚠️ Attendance must be greater than 0%'); hasErr = true; }
       if (hrs <= 0) { showToast('⚠️ Study Hours must be greater than 0'); hasErr = true; }
-      if (!internal || internal === '' || isNaN(internal)) { showToast('⚠️ Internal Marks is required'); hasErr = true; }
+      if (!it || it === '') { showToast('⚠️ Internal Test marks required'); hasErr = true; }
+      if (!asn || asn === '') { showToast('⚠️ Assignment marks required'); hasErr = true; }
+      if (!me || me === '') { showToast('⚠️ Model Exam marks required'); hasErr = true; }
     }
     if (hasErr) return;
   }
@@ -407,7 +411,10 @@ function buildReview() {
     { l: 'Gender', v: get('gender')?.value || '—' },
     { l: 'Attendance', v: (get('attendance')?.value || 0) + '%' },
     { l: 'Study Hours', v: (get('hour_study')?.value || 0) + ' hrs/day' },
-    { l: 'Internal', v: (get('internal')?.value || '—') + '/100' },
+    { l: 'Internal Test', v: (get('internal_test')?.value || '0') + '/50' },
+    { l: 'Assignment', v: (get('assignment')?.value || '0') + '/25' },
+    { l: 'Model Exam', v: (get('model_exam')?.value || '0') + '/75' },
+    { l: 'Normalized Internal', v: (get('internal')?.value || '0') + '/100' },
     { l: 'Arrears', v: get('arrears')?.value || '0' },
     { l: 'Projects', v: get('projects')?.value || '0' },
     { l: 'Internships', v: get('internships')?.value || '0' },
@@ -430,6 +437,25 @@ function buildReview() {
 function updateSlider(inputId, labelId, val, suffix) {
   const label = get(labelId);
   if (label) label.textContent = val + (suffix || '');
+}
+
+// ═══════════════════════════════════════════
+// INTERNAL MARKS AUTO-TOTAL (normalized to /100)
+// ═══════════════════════════════════════════
+// Max values per component — change here to adjust scheme
+const INTERNAL_MAX = { test: 50, assignment: 25, model: 75 };
+
+function calcInternalTotal() {
+  const it = Math.min(INTERNAL_MAX.test, Math.max(0, parseInt(get('internal_test')?.value || '0')));
+  const asn = Math.min(INTERNAL_MAX.assignment, Math.max(0, parseInt(get('assignment')?.value || '0')));
+  const me = Math.min(INTERNAL_MAX.model, Math.max(0, parseInt(get('model_exam')?.value || '0')));
+  const rawTotal = it + asn + me;
+  const maxTotal = INTERNAL_MAX.test + INTERNAL_MAX.assignment + INTERNAL_MAX.model;
+  const normalized = Math.round((rawTotal / maxTotal) * 100);
+  if (get('internal')) get('internal').value = normalized;
+  if (get('internalRawDisplay')) get('internalRawDisplay').textContent = rawTotal + ' / ' + maxTotal;
+  if (get('internalTotalDisplay')) get('internalTotalDisplay').textContent = normalized + ' / 100';
+  liveUpdate();
 }
 
 // ═══════════════════════════════════════════
@@ -691,7 +717,12 @@ function resetForm() {
   if (get('gender')) get('gender').selectedIndex = 0;
   if (get('attendance')) { get('attendance').value = 0; updateSlider('attendance', 'att-val', '0', '%'); }
   if (get('hour_study')) { get('hour_study').value = 0; updateSlider('hour_study', 'hrs-val', '0', ' hrs'); }
-  if (get('internal')) get('internal').value = '';
+  if (get('internal')) get('internal').value = '0';
+  if (get('internal_test')) get('internal_test').value = '';
+  if (get('assignment')) get('assignment').value = '';
+  if (get('model_exam')) get('model_exam').value = '';
+  if (get('internalRawDisplay')) get('internalRawDisplay').textContent = '0 / 150';
+  if (get('internalTotalDisplay')) get('internalTotalDisplay').textContent = '0 / 100';
   if (get('arrears')) get('arrears').value = '0';
   if (get('class_rank')) get('class_rank').value = '';
   if (get('projects')) get('projects').value = '0';
