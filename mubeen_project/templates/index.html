@@ -593,16 +593,9 @@
               <div class="slider-labels"><span>0%</span><span>50%</span><span>100%</span></div>
             </div>
 
-            <div class="slider-field">
-              <div class="slider-header">
-                <label>📚 Daily Study Hours</label>
-                <div class="slider-value-box" id="hrs-val">0 hrs</div>
-              </div>
-              <div class="slider-track">
-                <input type="range" id="hour_study" min="0" max="16" value="0"
-                  oninput="updateSlider('hour_study','hrs-val',this.value,' hrs');liveUpdate()">
-              </div>
-              <div class="slider-labels"><span>0</span><span>8</span><span>16</span></div>
+            <div class="field" style="margin-bottom: 20px;">
+              <label>📚 Daily Study Hours <span class="tip">(Optional)</span></label>
+              <input type="number" id="hour_study" placeholder="e.g. 4" min="0" max="16" oninput="liveUpdate()">
             </div>
 
             <div class="internal-breakdown"

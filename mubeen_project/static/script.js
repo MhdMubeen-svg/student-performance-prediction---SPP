@@ -528,7 +528,10 @@ function updateSemesterOptions() {
 // ═══════════════════════════════════════════
 function calcScore() {
   const att = Math.min(parseInt(get('attendance')?.value) || 0, 100);
-  const hrs = Math.min(parseInt(get('hour_study')?.value) || 0, 16);
+
+  const hrsVal = get('hour_study')?.value;
+  const hrs = hrsVal === '' ? 8 : Math.min(parseInt(hrsVal) || 0, 16);
+
   const internal = Math.min(parseInt(get('internal')?.value) || 0, 100);
   const projects = Math.min(parseInt(get('projects')?.value) || 0, 5);
   const internships = Math.min(parseInt(get('internships')?.value) || 0, 3);
@@ -595,7 +598,8 @@ function liveUpdate() {
 
   // Meters
   const att = parseInt(get('attendance')?.value) || 0;
-  const hrs = parseInt(get('hour_study')?.value) || 0;
+  const hrsVal = get('hour_study')?.value;
+  const hrs = hrsVal === '' ? 8 : (parseInt(hrsVal) || 0);
   const intl = parseInt(get('internal')?.value) || 0;
   const proj = parseInt(get('projects')?.value) || 0;
   const intern = parseInt(get('internships')?.value) || 0;
@@ -603,7 +607,7 @@ function liveUpdate() {
   if (get('m-att')) get('m-att').style.width = att + '%';
   if (get('mv-att')) get('mv-att').textContent = att;
   if (get('m-hrs')) get('m-hrs').style.width = (hrs / 16 * 100) + '%';
-  if (get('mv-hrs')) get('mv-hrs').textContent = hrs;
+  if (get('mv-hrs')) get('mv-hrs').textContent = hrsVal === '' ? '—' : hrs;
   if (get('m-int')) get('m-int').style.width = intl + '%';
   if (get('mv-int')) get('mv-int').textContent = intl || '—';
   if (get('m-proj')) get('m-proj').style.width = (Math.min(proj, 5) / 5 * 100) + '%';
@@ -627,7 +631,7 @@ function liveUpdate() {
   if (get('s-name')) get('s-name').textContent = get('name')?.value || '—';
   if (get('s-reg')) get('s-reg').textContent = get('register_no')?.value || '—';
   if (get('s-att')) get('s-att').textContent = att + '%';
-  if (get('s-hrs')) get('s-hrs').textContent = hrs + ' hrs';
+  if (get('s-hrs')) get('s-hrs').textContent = hrsVal === '' ? '—' : (hrs + ' hrs');
   if (get('s-int')) get('s-int').textContent = intl || '—';
   if (get('s-proj')) get('s-proj').textContent = proj;
   if (get('s-intern')) get('s-intern').textContent = intern;
@@ -672,7 +676,7 @@ async function submitStudent() {
     acad_year: get('acad_year')?.value || '',
     gender: get('gender')?.value || '',
     attendance: get('attendance')?.value || 0,
-    hour_study: get('hour_study')?.value || 0,
+    hour_study: get('hour_study')?.value === '' ? 8 : (get('hour_study')?.value || 0),
     internal: get('internal')?.value || 0,
     arrears: arrears,
     projects: get('projects')?.value || 0,
