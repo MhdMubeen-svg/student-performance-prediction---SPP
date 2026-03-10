@@ -445,7 +445,21 @@ function updateSlider(inputId, labelId, val, suffix) {
 // Max values per component — change here to adjust scheme
 const INTERNAL_MAX = { test: 50, assignment: 25, model: 75 };
 
+// ── Clamp helper: enforce min/max on any number input ──
+function clampInput(id, minV, maxV) {
+  const inp = get(id);
+  if (!inp || inp.value === '') return;
+  let v = parseInt(inp.value);
+  if (isNaN(v)) { inp.value = ''; return; }
+  if (v < minV) inp.value = minV;
+  if (v > maxV) inp.value = maxV;
+}
+
 function calcInternalTotal() {
+  clampInput('internal_test', 0, INTERNAL_MAX.test);
+  clampInput('assignment', 0, INTERNAL_MAX.assignment);
+  clampInput('model_exam', 0, INTERNAL_MAX.model);
+
   const it = Math.min(INTERNAL_MAX.test, Math.max(0, parseInt(get('internal_test')?.value || '0')));
   const asn = Math.min(INTERNAL_MAX.assignment, Math.max(0, parseInt(get('assignment')?.value || '0')));
   const me = Math.min(INTERNAL_MAX.model, Math.max(0, parseInt(get('model_exam')?.value || '0')));
